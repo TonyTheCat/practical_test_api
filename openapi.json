@@ -1,0 +1,510 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API documentation",
+    "description": "Practical test for https://protranslating.com/",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local dev server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Clients functions",
+      "description": "API functions for application"
+    }
+  ],
+  "paths": {
+    "client/create-client": {
+      "post": {
+        "tags": [
+          "Clients functions"
+        ],
+        "summary": "Create client ",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/clientCreateRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createClient"
+                }
+              }
+            }
+          },
+          "208": {
+            "description": "Email is already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "client/delete-client": {
+      "delete": {
+        "summary": "Delete client by email",
+        "tags": [
+          "Clients functions"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "_id",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deletedElements"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Client was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "client/update-client": {
+      "put": {
+        "summary": "Update client by email",
+        "tags": [
+          "Clients functions"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "_id",
+            "description": "Client ID client",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createClient"
+                }
+              }
+            }
+          },
+          "208": {
+            "description": "Email is already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "clients/get-paginated": {
+      "get": {
+        "summary": "Paginated client",
+        "tags": [
+          "Clients functions"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page for search",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Limit of users per page",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/paginatedClients"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provider/create-provider": {
+      "post": {
+        "tags": [
+          "Providers functions"
+        ],
+        "summary": "Create provider ",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/providerCreateRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createProvider"
+                }
+              }
+            }
+          },
+          "208": {
+            "description": "Provider is already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provider/delete-provider": {
+      "delete": {
+        "summary": "Delete provider by id",
+        "tags": [
+          "Providers functions"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "_id",
+            "description": "Provider ID",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deletedElements"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provider/update-provider": {
+      "put": {
+        "summary": "Update provider by id",
+        "tags": [
+          "Providers functions"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "_id",
+            "description": "Provider ID ",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createProvider"
+                }
+              }
+            }
+          },
+          "208": {
+            "description": "Provider already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provider/get-provider": {
+      "get": {
+        "summary": "Get providers array",
+        "tags": [
+          "Providers functions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/providersArray"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "requestBodies": {
+      "clientCreateRequest": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/createClient"
+            }
+          }
+        }
+      },
+      "providerCreateRequest": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/providerBody"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "createClient": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "providers": {
+            "type": "array",
+            "properties": {
+              "provider": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "errorMessage": {
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "successMessage": {
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "paginatedClients": {
+        "properties": {
+          "arrayClients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/createClient"
+            }
+          },
+          "totalNum": {
+            "type": "number"
+          }
+        }
+      },
+      "providerBody": {
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "createProvider": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "providersArray": {
+        "properties": {
+          "arrayProviders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/createProvider"
+            }
+          }
+        }
+      },
+      "deletedElements": {
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "payload": {
+            "type": "object",
+            "properties": {
+              "n": {
+                "type": "integer"
+              },
+              "ok": {
+                "type": "integer"
+              },
+              "deletedCount": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
